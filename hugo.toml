@@ -1,0 +1,12 @@
+baseURL = 'https://shamger.github.io/'
+languageCode = 'en-us'
+title = "shamger's blog"
+theme = 'mainroad'
+[[menu.main]]
+name = "首页"
+url = "/"
+weight = 1
+[[menu.main]]
+name = "文章"
+url = "/post/"
+weight = 2
