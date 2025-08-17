@@ -31,7 +31,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # 自动认证
+          github_token: ${{ secrets.PAT }}  # 自定义变量
           publish_branch: gh-pages  # 目标分支
           publish_dir: ./public     # 构建输出目录
           cname: yourdomain.com     # 可选：自定义域名
