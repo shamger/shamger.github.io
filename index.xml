@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>欢迎来访 on shamger's blog</title><link>https://shamger.github.io/</link><description>Recent content in 欢迎来访 on shamger's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 17 Aug 2025 17:56:16 +0800</lastBuildDate><atom:link href="https://shamger.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>新mac配置备忘</title><link>https://shamger.github.io/posts/new-mac-setting/</link><pubDate>Sun, 17 Aug 2025 17:56:16 +0800</pubDate><guid>https://shamger.github.io/posts/new-mac-setting/</guid><description>&lt;h3 id="mac终端配置">mac终端配置&lt;/h3>
+&lt;p>使用 iterm2+zsh+oh-my-zsh&lt;/p>
+&lt;ul>
+&lt;li>mac默认使用的是zsh作为shell，可以echo $SHEL确认&lt;/li>
+&lt;li>安装iterm2，官网下载&lt;/li>
+&lt;li>安装oh-my-zsh：sh -c &amp;ldquo;$(curl -fsSL raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;h3 id="vim配置">vim配置&lt;/h3>
+&lt;p>不考虑使用花里胡俏的插件，只使用以下简短几行配置，让vim符合自己使用习惯即可。&lt;/p>
+&lt;ol>
+&lt;li>打开～/.vimrc&lt;/li>
+&lt;li>添加以下配置&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code>set nu
+sy on
+set ruler
+set smartindent shiftwidth=4
+set tabstop=4
+set expandtab
+colorscheme desert
+&lt;/code>&lt;/pre></description></item><item><title>About This Site</title><link>https://shamger.github.io/about/about-this-site/</link><pubDate>Sun, 17 Aug 2025 17:41:41 +0800</pubDate><guid>https://shamger.github.io/about/about-this-site/</guid><description/></item><item><title>我是谁</title><link>https://shamger.github.io/about/aboutme/</link><pubDate>Sun, 17 Aug 2025 17:36:03 +0800</pubDate><guid>https://shamger.github.io/about/aboutme/</guid><description>&lt;h2 id="人生不设限">人生不设限&lt;/h2>
+&lt;p>浮躁的环境，需要一颗安静的内心。&lt;/p>
+&lt;h2 id="种一棵树最好的时间是十年前其次是现在">种一棵树最好的时间是十年前，其次是现在&lt;/h2>
+&lt;p>随便写点什么&amp;hellip;&lt;/p></description></item><item><title>just start</title><link>https://shamger.github.io/posts/just-start/</link><pubDate>Sun, 17 Aug 2025 10:05:20 +0800</pubDate><guid>https://shamger.github.io/posts/just-start/</guid><description>&lt;p>nothing
+111
+222&lt;/p></description></item></channel></rss>
