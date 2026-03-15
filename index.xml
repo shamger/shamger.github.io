@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>欢迎来访 on shamger's blog</title><link>https://shamger.github.io/</link><description>Recent content in 欢迎来访 on shamger's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sun, 17 Aug 2025 17:56:16 +0800</lastBuildDate><atom:link href="https://shamger.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>新mac配置备忘</title><link>https://shamger.github.io/posts/new-mac-setting/</link><pubDate>Sun, 17 Aug 2025 17:56:16 +0800</pubDate><guid>https://shamger.github.io/posts/new-mac-setting/</guid><description>&lt;h3 id="mac终端配置"&gt;mac终端配置&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>欢迎来访 on shamger's blog</title><link>https://shamger.github.io/</link><description>Recent content in 欢迎来访 on shamger's blog</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Sat, 14 Mar 2026 12:06:42 +0800</lastBuildDate><atom:link href="https://shamger.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>在MacOS上基于docker安装OpenClaw-使用本地部署LLM</title><link>https://shamger.github.io/posts/install-openclaw-in-docker-with-local-llm-macos/</link><pubDate>Sat, 14 Mar 2026 12:06:42 +0800</pubDate><guid>https://shamger.github.io/posts/install-openclaw-in-docker-with-local-llm-macos/</guid><description>&lt;h1 id="导语"&gt;导语&lt;/h1&gt;
+&lt;p&gt;近期小龙虾爆火，整个社会陷入了疯狂，有兴奋、有焦虑，加上自媒体疯狂宣传，让人觉得小龙虾已经无所不能，再不掌握就要给这个世界抛弃了。秉着实事求是的精神，我决定先手戳一个纯本地部署的小龙虾，毕竟打破盲目崇拜的最有效办法就是掌握它，而且还是零成本（当然个人电脑和宽带还是要有的哈哈）。&lt;/p&gt;
+&lt;h1 id="环境说明"&gt;环境说明&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Macbook Pro (Apple M4 Pro)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;整体思路是，考虑小龙虾的安全性和token消耗问题。我计划把小龙虾部署到本地docker环境中，同时在mac上安装ollama跑一个本地大模型，docker中的小龙虾访问宿主记得本地模型，从而解决以上两个问题。不过当然会比较烧cpu，而且本地模型性能会不如大模型厂商提供的服务，但是用于学习探索也足够了。&lt;/p&gt;
+&lt;h1 id="安装步骤"&gt;安装步骤&lt;/h1&gt;
+&lt;h2 id="ollama"&gt;ollama&lt;/h2&gt;
+&lt;p&gt;MacOS上只需要执行一下命令安装即可，安装后右下角选择想要的大模型，然后随便发个消息，系统就会自动下载模型。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install ollama
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://shamger.github.io/images/openclaw_ollama_index.png" alt="ollama图形界面"&gt;&lt;/p&gt;
+&lt;h2 id="qwen3-coder30b"&gt;qwen3-coder:30B&lt;/h2&gt;
+&lt;p&gt;我本地下载的是qwen3-coder:30B
+&lt;img src="https://shamger.github.io/images/openclaw_ollama_down_model.png" alt="ollama下载大模型"&gt;&lt;/p&gt;
+&lt;h2 id="测试本地模型api是否可用"&gt;测试本地模型API是否可用&lt;/h2&gt;
+&lt;p&gt;ollama除了提供图形窗口界面，还默认监听了本地11434端口，可通过浏览器访问如下地址验证API是否可用。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;http://localhost:11434/v1/models
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果正常，会有如下图的模型信息输出。
+&lt;img src="https://shamger.github.io/images/openclaw_ollama_api.png" alt="ollama API输出"&gt;&lt;/p&gt;
+&lt;h2 id="docker"&gt;docker&lt;/h2&gt;
+&lt;p&gt;这里不使用dockerDesktop，而使用替代品colima，主要是轻量/免费，当然缺点是只有命令行。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install colima docker docker-compose
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装后执行&lt;code&gt;colima start&lt;/code&gt;后，docker正常输出说面安装成功。&lt;/p&gt;
+&lt;h2 id="克隆openclaw代码和拉起容器"&gt;克隆OpenClaw代码和拉起容器&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;git clone https://github.com/OpenClaw/OpenClaw.git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这里先改一下docker-compose.yaml，改成从源码编译镜像，主打全手动自主撸小龙虾。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-yaml" data-lang="yaml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;diff --git a/docker-compose.yml b/docker-compose.yml&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;index 614a1f8d5..6afad2cb0 100644&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;--- &lt;span style="color:#ae81ff"&gt;a/docker-compose.yml&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;+++ b/docker-compose.yml&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;@@ -&lt;span style="color:#ae81ff"&gt;1&lt;/span&gt;,&lt;span style="color:#ae81ff"&gt;6&lt;/span&gt; &lt;span style="color:#ae81ff"&gt;+1,13 @@&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;openclaw-gateway&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;- &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;${OPENCLAW_IMAGE:-openclaw:local}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ #image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;${OPENCLAW_IMAGE:-openclaw:local}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ build&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ context&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ dockerfile&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Dockerfile&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ deploy&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ resources&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ limits&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ memory&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;4g&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;HOME&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;/home/node&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;TERM&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;xterm-256color&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;@@ -25,10 +32,18 @@ services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;${OPENCLAW_GATEWAY_BIND:-lan}&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;--port&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#e6db74"&gt;&amp;#34;18789&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#ae81ff"&gt;+ &amp;#34;--allow-unconfigured&amp;#34;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; ]
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;openclaw-cli&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;- &lt;span style="color:#f92672"&gt;image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;${OPENCLAW_IMAGE:-openclaw:local}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ #image&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;${OPENCLAW_IMAGE:-openclaw:local}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ build&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ context&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ dockerfile&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;Dockerfile&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ deploy&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ resources&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ limits&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#f92672"&gt;+ memory&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;4g&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;HOME&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;/home/node&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#f92672"&gt;TERM&lt;/span&gt;: &lt;span style="color:#ae81ff"&gt;xterm-256color&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;不过编译时，由于colima默认资源的限制，把Dockerfile也调整下，避免node.js编译时OOM&lt;/p&gt;</description></item><item><title>新mac配置备忘</title><link>https://shamger.github.io/posts/new-mac-setting/</link><pubDate>Sun, 17 Aug 2025 17:56:16 +0800</pubDate><guid>https://shamger.github.io/posts/new-mac-setting/</guid><description>&lt;h3 id="mac终端配置"&gt;mac终端配置&lt;/h3&gt;
 &lt;p&gt;使用 iterm2+zsh+oh-my-zsh&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;mac默认使用的是zsh作为shell，可以echo $SHEL确认&lt;/li&gt;
