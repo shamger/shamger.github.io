@@ -18,6 +18,7 @@ MacOS上只需要执行一下命令安装即可，安装后右下角选择想要
 ```shell
 brew install ollama
 ```
+图形界面需要访问`http://ollama.com`安装
 ![ollama图形界面](/images/openclaw_ollama_index.png)
 
 ## qwen3-coder:30B
