@@ -1,6 +1,6 @@
 +++
 date = '2026-03-14T12:06:42+08:00'
-draft = true
+draft = false
 title = '在MacOS上基于docker安装OpenClaw-使用本地部署LLM'
 +++
 
