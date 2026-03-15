@@ -9,7 +9,8 @@
 &lt;h2 id="ollama"&gt;ollama&lt;/h2&gt;
 &lt;p&gt;MacOS上只需要执行一下命令安装即可，安装后右下角选择想要的大模型，然后随便发个消息，系统就会自动下载模型。&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-shell" data-lang="shell"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;brew install ollama
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src="https://shamger.github.io/images/openclaw_ollama_index.png" alt="ollama图形界面"&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;图形界面需要访问&lt;code&gt;http://ollama.com&lt;/code&gt;安装
+&lt;img src="https://shamger.github.io/images/openclaw_ollama_index.png" alt="ollama图形界面"&gt;&lt;/p&gt;
 &lt;h2 id="qwen3-coder30b"&gt;qwen3-coder:30B&lt;/h2&gt;
 &lt;p&gt;我本地下载的是qwen3-coder:30B
 &lt;img src="https://shamger.github.io/images/openclaw_ollama_down_model.png" alt="ollama下载大模型"&gt;&lt;/p&gt;
