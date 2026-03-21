@@ -13,7 +13,7 @@ title = '新mac配置备忘'
 ### vim配置
 不考虑使用花里胡俏的插件，只使用以下简短几行配置，让vim符合自己使用习惯即可。
 1. 打开～/.vimrc
-1. 添加以下配置
+2. 添加以下配置
 ```
 set nu
 sy on
@@ -22,4 +22,19 @@ set smartindent shiftwidth=4
 set tabstop=4
 set expandtab
 colorscheme desert
+```
+3.设置 Vim 内部使用的字符编码
+```
+" 设置 Vim 内部使用的字符编码
+set encoding=utf-8
+
+" 设置自动识别的文件编码列表（按优先级从高到低）
+" 这样 Vim 会依次尝试 utf-8, gbk 等，解决大部分中文乱码
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+" 设置当前终端使用的编码
+set termencoding=utf-8
+
+" 解决菜单、提示信息乱码（如果有的话）
+language message zh_CN.UTF-8
 ```
