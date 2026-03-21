@@ -52,6 +52,18 @@ set smartindent shiftwidth=4
 set tabstop=4
 set expandtab
 colorscheme desert
+</code></pre><p>3.设置 Vim 内部使用的字符编码</p><pre tabindex=0><code>&#34; 设置 Vim 内部使用的字符编码
+set encoding=utf-8
+
+&#34; 设置自动识别的文件编码列表（按优先级从高到低）
+&#34; 这样 Vim 会依次尝试 utf-8, gbk 等，解决大部分中文乱码
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+&#34; 设置当前终端使用的编码
+set termencoding=utf-8
+
+&#34; 解决菜单、提示信息乱码（如果有的话）
+language message zh_CN.UTF-8
 </code></pre></div></article><article class="list__item post"><header class=list__header><h2 class="list__title post__title"><a href=/posts/just-start/ rel=bookmark>just start</a></h2></header><div class="content list__excerpt post__content clearfix"><p>nothing
 111
 222</p></div></article></main></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2026 shamger's blog.

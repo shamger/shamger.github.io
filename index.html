@@ -1,4 +1,4 @@
-<!doctype html><html class=no-js lang=en><head><meta name=generator content="Hugo 0.157.0"><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>shamger's blog</title><script>(function(e,t){e[t]=e[t].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"><link rel=stylesheet href=/css/style.css><link rel=alternate type=application/rss+xml href=/index.xml title="shamger's blog"><link rel="shortcut icon" href=/favicon.ico></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="shamger's blog" rel=home><div class="logo__item logo__text"><div class=logo__title>shamger's blog</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<!doctype html><html class=no-js lang=en><head><meta name=generator content="Hugo 0.158.0"><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>shamger's blog</title><script>(function(e,t){e[t]=e[t].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700"><link rel=stylesheet href=/css/style.css><link rel=alternate type=application/rss+xml href=/index.xml title="shamger's blog"><link rel="shortcut icon" href=/favicon.ico></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="shamger's blog" rel=home><div class="logo__item logo__text"><div class=logo__title>shamger's blog</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
 <span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>首页</span></a></li><li class=menu__item><a class=menu__link href=/posts/><span class=menu__text>文章</span></a></li><li class=menu__item><a class=menu__link href=/about/><span class=menu__text>关于</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class="main list" role=main><div class="content main__content clearfix"><p>敬请期待&mldr;</p></div><article class="list__item post"><header class=list__header><h2 class="list__title post__title"><a href=/posts/install-openclaw-in-docker-with-local-llm-macos/ rel=bookmark>在MacOS上基于docker安装OpenClaw-使用本地部署LLM</a></h2></header><div class="content list__excerpt post__content clearfix"><h1 id=导语>导语</h1><p>近期小龙虾爆火，整个社会陷入了疯狂，有兴奋、有焦虑，加上自媒体疯狂宣传，让人觉得小龙虾已经无所不能，再不掌握就要给这个世界抛弃了。秉着实事求是的精神，我决定先手戳一个纯本地部署的小龙虾，毕竟打破盲目崇拜的最有效办法就是掌握它，而且还是零成本（当然个人电脑和宽带还是要有的哈哈）。</p><h1 id=环境说明>环境说明</h1><ul><li>Macbook Pro (Apple M4 Pro)</li></ul><p>整体思路是，考虑小龙虾的安全性和token消耗问题。我计划把小龙虾部署到本地docker环境中，同时在mac上安装ollama跑一个本地大模型，docker中的小龙虾访问宿主记得本地模型，从而解决以上两个问题。不过当然会比较烧cpu，而且本地模型性能会不如大模型厂商提供的服务，但是用于学习探索也足够了。</p><h1 id=安装步骤>安装步骤</h1><h2 id=ollama>ollama</h2><p>MacOS上只需要执行一下命令安装即可，安装后右下角选择想要的大模型，然后随便发个消息，系统就会自动下载模型。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none><code class=language-shell data-lang=shell><span style=display:flex><span>brew install ollama
 </span></span></code></pre></div><p>图形界面需要访问<code>http://ollama.com</code>安装
 <img src=/images/openclaw_ollama_index.png alt=ollama图形界面></p><h2 id=qwen3-coder30b>qwen3-coder:30B</h2><p>我本地下载的是qwen3-coder:30B
@@ -52,6 +52,18 @@ set smartindent shiftwidth=4
 set tabstop=4
 set expandtab
 colorscheme desert
+</code></pre><p>3.设置 Vim 内部使用的字符编码</p><pre tabindex=0><code>&#34; 设置 Vim 内部使用的字符编码
+set encoding=utf-8
+
+&#34; 设置自动识别的文件编码列表（按优先级从高到低）
+&#34; 这样 Vim 会依次尝试 utf-8, gbk 等，解决大部分中文乱码
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+&#34; 设置当前终端使用的编码
+set termencoding=utf-8
+
+&#34; 解决菜单、提示信息乱码（如果有的话）
+language message zh_CN.UTF-8
 </code></pre></div></article><article class="list__item post"><header class=list__header><h2 class="list__title post__title"><a href=/posts/just-start/ rel=bookmark>just start</a></h2></header><div class="content list__excerpt post__content clearfix"><p>nothing
 111
 222</p></div></article></main></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2026 shamger's blog.

@@ -85,6 +85,19 @@ set smartindent shiftwidth=4
 set tabstop=4
 set expandtab
 colorscheme desert
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.设置 Vim 内部使用的字符编码&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;&amp;#34; 设置 Vim 内部使用的字符编码
+set encoding=utf-8
+
+&amp;#34; 设置自动识别的文件编码列表（按优先级从高到低）
+&amp;#34; 这样 Vim 会依次尝试 utf-8, gbk 等，解决大部分中文乱码
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+&amp;#34; 设置当前终端使用的编码
+set termencoding=utf-8
+
+&amp;#34; 解决菜单、提示信息乱码（如果有的话）
+language message zh_CN.UTF-8
 &lt;/code&gt;&lt;/pre&gt;</description></item><item><title>About This Site</title><link>https://shamger.github.io/about/about-this-site/</link><pubDate>Sun, 17 Aug 2025 17:41:41 +0800</pubDate><guid>https://shamger.github.io/about/about-this-site/</guid><description/></item><item><title>我是谁</title><link>https://shamger.github.io/about/aboutme/</link><pubDate>Sun, 17 Aug 2025 17:36:03 +0800</pubDate><guid>https://shamger.github.io/about/aboutme/</guid><description>&lt;h2 id="人生不设限"&gt;人生不设限&lt;/h2&gt;
 &lt;p&gt;浮躁的环境，需要一颗安静的内心。&lt;/p&gt;
 &lt;h2 id="种一棵树最好的时间是十年前其次是现在"&gt;种一棵树最好的时间是十年前，其次是现在&lt;/h2&gt;
