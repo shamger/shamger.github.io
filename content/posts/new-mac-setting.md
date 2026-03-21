@@ -23,7 +23,7 @@ set tabstop=4
 set expandtab
 colorscheme desert
 ```
-3.设置 Vim 内部使用的字符编码
+3.添加以下配置使vim支持中文
 ```
 " 设置 Vim 内部使用的字符编码
 set encoding=utf-8
