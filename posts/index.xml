@@ -85,7 +85,7 @@ set smartindent shiftwidth=4
 set tabstop=4
 set expandtab
 colorscheme desert
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.设置 Vim 内部使用的字符编码&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;3.添加以下配置使vim支持中文&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;&amp;#34; 设置 Vim 内部使用的字符编码
 set encoding=utf-8
 
